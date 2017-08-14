@@ -1,17 +1,20 @@
 package org.hospital.management.laboratory.dao;
 
-import java.util.List;
-
+import org.hibernate.SessionFactory;
 import org.hospital.management.laboratory.model.User;
-import org.hospital.management.laboratory.support.CustomHibernateDaoSupport;
 
-public class LoginServiceDaoImpl extends CustomHibernateDaoSupport implements LoginServiceDao {
+public class LoginServiceDaoImpl implements LoginServiceDao {
+	private SessionFactory sessionFactory;
+
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
 
 	public User findByUsername(String username) {
 
-		@SuppressWarnings("unchecked")
-		List<User> list = getHibernateTemplate().find("from User where username = ?", username);
-		return list.get(0);
+		return (User) this.sessionFactory.getCurrentSession().createQuery("from User where username = ?")
+				.setParameter(0, username).list().get(0);
+
 	}
 
 }

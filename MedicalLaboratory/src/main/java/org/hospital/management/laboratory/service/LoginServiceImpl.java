@@ -6,11 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class LoginServiceImpl implements LoginService {
 	@Autowired
-	LoginServiceDao dao;
+	LoginServiceDao loginServiceDao;
 
 	public User findByUsername(String username) {
 
-		return dao.findByUsername(username);
+		return loginServiceDao.findByUsername(username);
 	}
 
 }

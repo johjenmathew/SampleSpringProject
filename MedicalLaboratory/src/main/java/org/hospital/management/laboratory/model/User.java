@@ -22,7 +22,6 @@ public class User {
 		this.username = username;
 	}
 
-	@Id
 	@Column(name="password")
 	public String getPassword() {
 		return password;
