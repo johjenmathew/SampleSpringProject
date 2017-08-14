@@ -20,7 +20,8 @@ public class LoginController {
 		String username = user.getUsername();
 		ApplicationContext appContext = new ClassPathXmlApplicationContext("spring-mvc-servlet.xml");
 		LoginService service = (LoginService) appContext.getBean("loginService");
-		if (user.getUsername().equalsIgnoreCase("Johjen") && user.getPassword().equals("password")) {
+		User userBean = service.findByUsername(username);
+		if (user.getUsername().equalsIgnoreCase(userBean.getUsername()) && user.getPassword().equals(userBean.getPassword())) {
 			ModelAndView view = new ModelAndView("success");
 			return view;
 		} else {
